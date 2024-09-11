@@ -34,16 +34,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget google-chrome-stable xvfb libxi6 libgconf-2-4
+          google-chrome --version
 
       - name: Set up ChromeDriver
         run: |
           sudo apt-get install -yqq unzip
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+          echo "Detected Chrome version: $CHROME_VERSION"
           CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          echo "Using ChromeDriver version: $CHROME_DRIVER_VERSION"
           wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
           sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
-          google-chrome --version
           chromedriver --version
 
       - name: Verify Java installation
