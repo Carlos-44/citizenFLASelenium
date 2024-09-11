@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'adopt' # Use 'adopt' for AdoptOpenJDK, or 'zulu' for Azul Zulu
+          distribution: 'adopt' # Use 'adopt' for AdoptOpenJDK
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -33,14 +33,17 @@ jobs:
       - name: Install Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y wget google-chrome-stable
 
       - name: Set up ChromeDriver
         run: |
           sudo apt-get install -yqq unzip
-          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
+          CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
           sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
+          google-chrome --version
+          chromedriver --version
 
-      - name: Run Maven tests
+      - name: Run Maven tests with debug
         run: mvn test -X
