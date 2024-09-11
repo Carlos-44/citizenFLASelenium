@@ -1,0 +1,25 @@
+# Ignore all .class files
+*.class
+
+# Ignore all target folder contents
+/target/
+
+# Ignore Eclipse project-specific files
+.project
+.classpath
+.settings/
+
+# Ignore Maven-related directories and files
+.mvn/
+# Remove the following line to keep src/main tracked
+#**/src/main/**
+
+# Ignore test-output directory
+/test-output/
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
