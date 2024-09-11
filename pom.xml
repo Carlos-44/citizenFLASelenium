@@ -7,12 +7,18 @@
     <artifactId>CitizensFLAProject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <properties>
+        <!-- Set the Java version to 1.8 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
     <dependencies>
         <!-- Selenium WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.11.0</version> <!-- Updated to the latest stable version -->
+            <version>4.11.0</version> <!-- Latest stable version -->
         </dependency>
 
         <!-- TestNG -->
@@ -23,11 +29,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WebDriverManager to manage WebDriver binaries -->
+        <!-- WebDriverManager (compatible with Java 8) -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.4.0</version> <!-- Updated to the latest stable version -->
+            <version>4.4.3</version> <!-- Java 8 compatible version -->
         </dependency>
 
         <!-- SLF4J API for logging -->
@@ -43,11 +49,21 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.30</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Maven Compiler Plugin to use the specified Java version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
             <!-- Maven Surefire Plugin to run TestNG tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
