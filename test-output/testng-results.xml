@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="13" passed="13" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-09-11T12:36:24 EDT" name="Suite" finished-at="2024-09-11T12:40:46 EDT" duration-ms="262071">
+    <groups>
+    </groups>
+    <test started-at="2024-09-11T12:36:24 EDT" name="CitizensFLAProject Tests" finished-at="2024-09-11T12:40:46 EDT" duration-ms="262071">
+      <class name="tests.LoginTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:24 EDT" name="setup" finished-at="2024-09-11T12:36:30 EDT" duration-ms="5879" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testInvalidLogin()[pri:1, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:30 EDT" name="testInvalidLogin" finished-at="2024-09-11T12:36:31 EDT" duration-ms="1031" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInvalidLogin -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:31 EDT" name="teardown" finished-at="2024-09-11T12:36:31 EDT" duration-ms="202" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:31 EDT" name="setup" finished-at="2024-09-11T12:36:37 EDT" duration-ms="5291" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testEmptyUsername()[pri:2, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:37 EDT" name="testEmptyUsername" finished-at="2024-09-11T12:36:38 EDT" duration-ms="910" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEmptyUsername -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:38 EDT" name="teardown" finished-at="2024-09-11T12:36:38 EDT" duration-ms="177" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:38 EDT" name="setup" finished-at="2024-09-11T12:36:41 EDT" duration-ms="3477" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testEmptyPassword()[pri:3, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:41 EDT" name="testEmptyPassword" finished-at="2024-09-11T12:36:43 EDT" duration-ms="1938" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEmptyPassword -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:43 EDT" name="teardown" finished-at="2024-09-11T12:36:43 EDT" duration-ms="191" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:43 EDT" name="setup" finished-at="2024-09-11T12:36:48 EDT" duration-ms="4494" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testEmptyUsernameAndPassword()[pri:4, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:48 EDT" name="testEmptyUsernameAndPassword" finished-at="2024-09-11T12:36:49 EDT" duration-ms="769" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testEmptyUsernameAndPassword -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.LoginTest@3b6ddd1d]" started-at="2024-09-11T12:36:49 EDT" name="teardown" finished-at="2024-09-11T12:36:49 EDT" duration-ms="200" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- tests.LoginTest -->
+      <class name="tests.FooterLinksTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:21 EDT" name="setup" finished-at="2024-09-11T12:39:25 EDT" duration-ms="3871" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickTermsAndConditions()[pri:1, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:25 EDT" name="testClickTermsAndConditions" finished-at="2024-09-11T12:39:28 EDT" duration-ms="2667" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickTermsAndConditions -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:28 EDT" name="teardown" finished-at="2024-09-11T12:39:28 EDT" duration-ms="185" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:28 EDT" name="setup" finished-at="2024-09-11T12:39:36 EDT" duration-ms="8575" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickPrivacyPolicy()[pri:2, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:36 EDT" name="testClickPrivacyPolicy" finished-at="2024-09-11T12:39:57 EDT" duration-ms="20392" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickPrivacyPolicy -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:57 EDT" name="teardown" finished-at="2024-09-11T12:39:57 EDT" duration-ms="244" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:39:57 EDT" name="setup" finished-at="2024-09-11T12:40:02 EDT" duration-ms="4711" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickSiteMap()[pri:3, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:40:02 EDT" name="testClickSiteMap" finished-at="2024-09-11T12:40:22 EDT" duration-ms="20293" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickSiteMap -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:40:22 EDT" name="teardown" finished-at="2024-09-11T12:40:22 EDT" duration-ms="179" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:40:22 EDT" name="setup" finished-at="2024-09-11T12:40:26 EDT" duration-ms="3657" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickAccessibility()[pri:4, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:40:26 EDT" name="testClickAccessibility" finished-at="2024-09-11T12:40:46 EDT" duration-ms="20299" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickAccessibility -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.FooterLinksTest@437da279]" started-at="2024-09-11T12:40:46 EDT" name="teardown" finished-at="2024-09-11T12:40:46 EDT" duration-ms="190" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- tests.FooterLinksTest -->
+      <class name="tests.ClaimsSectionTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:36:49 EDT" name="setup" finished-at="2024-09-11T12:37:14 EDT" duration-ms="25100" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickReportAClaim()[pri:1, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:37:14 EDT" name="testClickReportAClaim" finished-at="2024-09-11T12:37:16 EDT" duration-ms="1674" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickReportAClaim -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:37:16 EDT" name="teardown" finished-at="2024-09-11T12:37:16 EDT" duration-ms="198" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:37:16 EDT" name="setup" finished-at="2024-09-11T12:37:41 EDT" duration-ms="25148" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickSinkholeClaims()[pri:2, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:37:41 EDT" name="testClickSinkholeClaims" finished-at="2024-09-11T12:37:43 EDT" duration-ms="1686" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickSinkholeClaims -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:37:43 EDT" name="teardown" finished-at="2024-09-11T12:37:43 EDT" duration-ms="187" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:37:43 EDT" name="setup" finished-at="2024-09-11T12:38:07 EDT" duration-ms="24140" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickLossInspection()[pri:3, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:38:07 EDT" name="testClickLossInspection" finished-at="2024-09-11T12:38:28 EDT" duration-ms="20635" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickLossInspection -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:38:28 EDT" name="teardown" finished-at="2024-09-11T12:38:28 EDT" duration-ms="242" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:38:28 EDT" name="setup" finished-at="2024-09-11T12:38:52 EDT" duration-ms="23700" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickInsuranceFraud()[pri:4, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:38:52 EDT" name="testClickInsuranceFraud" finished-at="2024-09-11T12:38:54 EDT" duration-ms="1965" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickInsuranceFraud -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:38:54 EDT" name="teardown" finished-at="2024-09-11T12:38:54 EDT" duration-ms="187" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:38:54 EDT" name="setup" finished-at="2024-09-11T12:39:18 EDT" duration-ms="23917" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testClickContactCitizensFirst()[pri:5, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:39:18 EDT" name="testClickContactCitizensFirst" finished-at="2024-09-11T12:39:21 EDT" duration-ms="3200" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClickContactCitizensFirst -->
+        <test-method is-config="true" signature="teardown()[pri:0, instance:tests.ClaimsSectionTest@7bab3f1a]" started-at="2024-09-11T12:39:21 EDT" name="teardown" finished-at="2024-09-11T12:39:21 EDT" duration-ms="230" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- tests.ClaimsSectionTest -->
+    </test> <!-- CitizensFLAProject Tests -->
+  </suite> <!-- Suite -->
+</testng-results>
