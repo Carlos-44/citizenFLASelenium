@@ -71,7 +71,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile> <!-- Runs your testng.xml suite -->
+                        <suiteXmlFile>src/test/java/testng.xml</suiteXmlFile> <!-- Correct path for testng.xml -->
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
