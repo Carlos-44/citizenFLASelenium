@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Selenium Tests
 
 on:
@@ -42,3 +43,60 @@ jobs:
 
       - name: Run Maven tests
         run: mvn test
+=======
+name: Selenium Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'adopt' # Use 'adopt' for AdoptOpenJDK
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven
+
+      - name: Install Chrome and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget google-chrome-stable xvfb libxi6 libgconf-2-4
+          google-chrome --version
+
+      - name: Set up ChromeDriver with fallback
+        run: |
+          sudo apt-get install -yqq unzip
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' || echo "114.0.5735")
+          echo "Detected Chrome version: $CHROME_VERSION"
+          CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION || echo "114.0.5735.90")
+          echo "Using ChromeDriver version: $CHROME_DRIVER_VERSION"
+          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip || wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          chromedriver --version
+
+      - name: Verify Java installation
+        run: java -version
+
+      - name: Run Maven tests with debug
+        run: mvn clean test -X
+>>>>>>> b00c9ca98ec1e126dc0cb6af23ff1ebc12d4980d
