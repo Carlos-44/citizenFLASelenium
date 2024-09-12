@@ -1,8 +1,8 @@
 package tests;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,15 +16,21 @@ import java.time.Duration;
 
 public class FooterLinksTest {
 
-    WebDriver driver;
-    HomePage homePage;
-    WebDriverWait wait;
+    private WebDriver driver;
+    private HomePage homePage;
+    private WebDriverWait wait;
 
     @BeforeMethod
     public void setup() {
-    	WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
-        driver.manage().window().maximize();
+        WebDriverManager.edgedriver().setup();
+
+        // Using EdgeOptions for better execution in different environments
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("--start-maximized");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-extensions");
+
+        driver = new EdgeDriver(options);
         driver.manage().deleteAllCookies();
         driver.get("https://www.citizensfla.com/");
         homePage = new HomePage(driver);
@@ -44,7 +50,8 @@ public class FooterLinksTest {
         homePage.clickTermsAndConditions();
         wait.until(ExpectedConditions.titleContains("Terms & Conditions"));
         String expectedHeader = "Terms & Conditions";
-        Assert.assertTrue(driver.getPageSource().contains(expectedHeader), "Incorrect Terms & Conditions page.");
+        Assert.assertTrue(driver.getPageSource().contains(expectedHeader),
+            "Terms & Conditions page did not load as expected.");
     }
 
     // Test clicking the "Privacy Policy" link
@@ -53,7 +60,8 @@ public class FooterLinksTest {
         homePage.clickPrivacyPolicy();
         wait.until(ExpectedConditions.titleContains("Privacy Policy"));
         String expectedHeader = "Privacy Policy";
-        Assert.assertTrue(driver.getPageSource().contains(expectedHeader), "Incorrect Privacy Policy page.");
+        Assert.assertTrue(driver.getPageSource().contains(expectedHeader),
+            "Privacy Policy page did not load as expected.");
     }
 
     // Test clicking the "Site Map" link
@@ -62,7 +70,8 @@ public class FooterLinksTest {
         homePage.clickSiteMap();
         wait.until(ExpectedConditions.titleContains("Site Map"));
         String expectedHeader = "Site Map";
-        Assert.assertTrue(driver.getPageSource().contains(expectedHeader), "Incorrect Site Map page.");
+        Assert.assertTrue(driver.getPageSource().contains(expectedHeader),
+            "Site Map page did not load as expected.");
     }
 
     // Test clicking the "Accessibility" link
@@ -71,6 +80,7 @@ public class FooterLinksTest {
         homePage.clickAccessibility();
         wait.until(ExpectedConditions.titleContains("Accessibility"));
         String expectedHeader = "Accessibility";
-        Assert.assertTrue(driver.getPageSource().contains(expectedHeader), "Incorrect Accessibility page.");
+        Assert.assertTrue(driver.getPageSource().contains(expectedHeader),
+            "Accessibility page did not load as expected.");
     }
 }

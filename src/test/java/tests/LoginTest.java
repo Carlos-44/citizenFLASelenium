@@ -3,8 +3,8 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -18,103 +18,106 @@ import java.time.Duration;
 
 public class LoginTest {
 
-	WebDriver driver;
-	HomePage homePage;
-	LoginPage loginPage;
+    private WebDriver driver;
+    private HomePage homePage;
+    private LoginPage loginPage;
+    private WebDriverWait wait;
 
-	// Initialize the WebDriver, HomePage, and LoginPage before each test
-	@BeforeMethod
-	public void setup() {
-		WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
+    // Initialize the WebDriver, HomePage, and LoginPage before each test
+    @BeforeMethod
+    public void setup() {
+        WebDriverManager.edgedriver().setup();
 
-		// Maximize the browser window to fill the screen
-		driver.manage().window().maximize();
+        // Configure EdgeOptions for better execution
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("--start-maximized");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-gpu");
 
-		// Clear cookies before running the tests
-		driver.manage().deleteAllCookies();
+        driver = new EdgeDriver(options);
+        driver.manage().deleteAllCookies();
+        driver.get("https://www.citizensfla.com/");
 
-		// Navigate to the website
-		driver.get("https://www.citizensfla.com/");
+        // Initialize page objects
+        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
 
-		// Initialize page objects
-		homePage = new HomePage(driver);
-		loginPage = new LoginPage(driver);
+        // Explicit wait initialization
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-		// Wait for and click on the login button before each test
-		homePage.clickLogin(); // Uses the updated clickLogin with explicit wait
-	}
+        // Wait for and click on the login button before each test
+        homePage.clickLogin();
+    }
 
-	// Clean up after each test by quitting the browser
-	@AfterMethod
-	public void teardown() {
-		if (driver != null) {
-			driver.quit();
-		}
-	}
+    // Clean up after each test by quitting the browser
+    @AfterMethod
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
-	@Test(priority = 1)
-	public void testInvalidLogin() {
-		loginPage.enterUsername("invalidUser");
-		loginPage.enterPassword("invalidPassword");
-		loginPage.clickSubmit();
+    // Test for invalid login
+    @Test(priority = 1)
+    public void testInvalidLogin() {
+        loginPage.enterUsername("invalidUser");
+        loginPage.enterPassword("invalidPassword");
+        loginPage.clickSubmit();
 
-		// Wait for the "Username or password is incorrect" error message to appear
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		WebElement errorMessageElement = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//font[contains(text(),'Username or password is incorrect')]")));
+        // Wait for and verify the error message
+        WebElement errorMessageElement = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//font[contains(text(),'Username or password is incorrect')]")));
 
-		// Assertion: Check if the error message is correct
-		String actualErrorMessage = errorMessageElement.getText();
-		String expectedErrorMessage = "Username or password is incorrect.";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error message for invalid login is incorrect");
-	}
+        String actualErrorMessage = errorMessageElement.getText();
+        String expectedErrorMessage = "Username or password is incorrect.";
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage,
+                "Error message for invalid login is incorrect.");
+    }
 
-	@Test(priority = 2)
-	public void testEmptyUsername() {
-		loginPage.enterPassword("validPassword");
-		loginPage.clickSubmit();
+    // Test when the username is missing
+    @Test(priority = 2)
+    public void testEmptyUsername() {
+        loginPage.enterPassword("validPassword");
+        loginPage.clickSubmit();
 
-		// Wait for the "Username required" error message to appear
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		WebElement errorMessageElement = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//font[contains(text(),'Username required')]")));
+        // Wait for and verify the error message
+        WebElement errorMessageElement = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//font[contains(text(),'Username required')]")));
 
-		// Assertion: Check if the error message is correct
-		String actualErrorMessage = errorMessageElement.getText();
-		String expectedErrorMessage = "Username required. Your username may be your first initial and last name, with no spaces. In some cases, additional numbers may follow your last name.";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage,
-				"Error message for missing username is incorrect");
-	}
+        String actualErrorMessage = errorMessageElement.getText();
+        String expectedErrorMessage = "Username required. Your username may be your first initial and last name, with no spaces. In some cases, additional numbers may follow your last name.";
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage,
+                "Error message for missing username is incorrect.");
+    }
 
-	@Test(priority = 3)
-	public void testEmptyPassword() {
-		loginPage.enterUsername("validUser");
-		loginPage.clickSubmit();
+    // Test when the password is missing
+    @Test(priority = 3)
+    public void testEmptyPassword() {
+        loginPage.enterUsername("validUser");
+        loginPage.clickSubmit();
 
-		// Wait for the error message to appear
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		WebElement errorMessageElement = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//font[normalize-space()='Password required.']")));
+        // Wait for and verify the error message
+        WebElement errorMessageElement = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//font[normalize-space()='Password required.']")));
 
-		// Assertion: Check if the error message is correct
-		String actualErrorMessage = errorMessageElement.getText();
-		String expectedErrorMessage = "Password required.";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage,
-				"Error message for missing password is incorrect");
-	}
+        String actualErrorMessage = errorMessageElement.getText();
+        String expectedErrorMessage = "Password required.";
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage,
+                "Error message for missing password is incorrect.");
+    }
 
-	@Test(priority = 4)
-	public void testEmptyUsernameAndPassword() {
-		loginPage.clickSubmit();
+    // Test when both username and password are missing
+    @Test(priority = 4)
+    public void testEmptyUsernameAndPassword() {
+        loginPage.clickSubmit();
 
-		// Assertion for empty username and password
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		WebElement errorMessageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//font[normalize-space()='Enter username and password to log in.']")));
+        // Wait for and verify the error message
+        WebElement errorMessageElement = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//font[normalize-space()='Enter username and password to log in.']")));
 
-		String actualErrorMessage = errorMessageElement.getText();
-		String expectedErrorMessage = "Enter username and password to log in.";
-		Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error message for empty fields is incorrect");
-	}
+        String actualErrorMessage = errorMessageElement.getText();
+        String expectedErrorMessage = "Enter username and password to log in.";
+        Assert.assertEquals(actualErrorMessage, expectedErrorMessage,
+                "Error message for missing username and password is incorrect.");
+    }
 }
