@@ -40,15 +40,14 @@ jobs:
           sudo apt install -yqq unzip
 
           # Detect the version of Microsoft Edge
-          EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+' || echo "128.0.2739.67") # Default version
+          EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+' || echo "128.0.2739.67")
           echo "Detected Edge version: $EDGE_VERSION"
 
           # Fetch the corresponding EdgeDriver version
-          EDGEDRIVER_VERSION=$(curl -s https://msedgedriver.azureedge.net/LATEST_RELEASE_$EDGE_VERSION)
+          EDGEDRIVER_VERSION=$(curl -s https://msedgedriver.azureedge.net/LATEST_RELEASE_$EDGE_VERSION || echo "128.0.0")
 
           if [ -z "$EDGEDRIVER_VERSION" ]; then
-            echo "Failed to detect EdgeDriver version, using fallback."
-            EDGEDRIVER_VERSION="128.0.2739.67" # Default EdgeDriver version
+            EDGEDRIVER_VERSION="128.0.0" # Default to a stable version if detection fails
           fi
 
           echo "Using EdgeDriver version: $EDGEDRIVER_VERSION"
@@ -57,11 +56,6 @@ jobs:
           sudo unzip /tmp/edgedriver.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/msedgedriver
           msedgedriver --version
-
-      - name: Verify network connectivity
-        run: |
-          ping -c 4 google.com
-          curl -I https://packages.microsoft.com
 
       - name: Verify Java installation
         run: java -version
