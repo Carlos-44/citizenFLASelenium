@@ -38,21 +38,21 @@ jobs:
           sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
           sudo apt install -y microsoft-edge-stable
           sudo apt install -yqq unzip
-          
+
           # Detect the version of Microsoft Edge
           EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+' || echo "128.0.0")
           echo "Detected Edge version: $EDGE_VERSION"
-          
+
           # Fetch the corresponding EdgeDriver version
           EDGEDRIVER_VERSION=$(curl -s https://msedgedriver.azureedge.net/LATEST_RELEASE_$EDGE_VERSION || echo "128.0.0")
-          
+
           if [ -z "$EDGEDRIVER_VERSION" ]; then
             EDGEDRIVER_VERSION="128.0.0" # Default to a stable version if detection fails
           fi
-          
+
           echo "Using EdgeDriver version: $EDGEDRIVER_VERSION"
           wget -O /tmp/edgedriver.zip https://msedgedriver.azureedge.net/$EDGEDRIVER_VERSION/edgedriver_linux64.zip
-          
+
           sudo unzip /tmp/edgedriver.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/msedgedriver
           msedgedriver --version
