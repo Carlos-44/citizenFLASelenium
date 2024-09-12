@@ -1,7 +1,7 @@
 package tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,76 +13,85 @@ import java.time.Duration;
 
 public class ClaimsSectionTest {
 
-	WebDriver driver;
-	HomePage homePage;
+    WebDriver driver;
+    HomePage homePage;
 
-	@BeforeMethod
-	public void setup() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+    @BeforeMethod
+    public void setup() {
+        // Setup WebDriver for Edge
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        
+        // Browser configuration
+        driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-		// Maximize the browser window
-		driver.manage().window().maximize();
+        // Navigate to Citizens website
+        driver.get("https://www.citizensfla.com/");
 
-		// Clear all cookies before running the tests
-		driver.manage().deleteAllCookies();
+        // Initialize HomePage object
+        homePage = new HomePage(driver);
+        
+        // Open the Claims section before each test
+        homePage.clickClaims();
+    }
 
-		// Fallback implicit wait in case elements are slow to load
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    @AfterMethod
+    public void teardown() {
+        // Quit the driver after each test
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
-		// Navigate to the website
-		driver.get("https://www.citizensfla.com/");
+    // Test for "Report A Claim" button
+    @Test(priority = 1)
+    public void testClickReportAClaim() {
+        // Click Report A Claim button
+        homePage.clickReportAClaim();
+        
+        // Verify the Report A Claim page is displayed
+        Assert.assertTrue(homePage.isReportAClaimPage(), "Failed to verify 'Report a Claim' page.");
+    }
 
-		// Initialize page object
-		homePage = new HomePage(driver);
+    // Test for "Sinkhole Claims" button
+    @Test(priority = 2)
+    public void testClickSinkholeClaims() {
+        // Click Sinkhole Claims button
+        homePage.clickSinkholeClaims();
+        
+        // Verify the Sinkhole Claims page is displayed
+        Assert.assertTrue(homePage.isSinkholeClaimsPage(), "Failed to verify 'Sinkhole Claims' page.");
+    }
 
-		// Try to click the Claims button and handle any potential errors
-		try {
-			homePage.clickClaims();
-		} catch (Exception e) {
-			System.err.println("Failed to load the Claims section.");
-			e.printStackTrace();
-		}
-	}
+    // Test for "Loss Inspection" button
+    @Test(priority = 3)
+    public void testClickLossInspection() {
+        // Click Loss Inspection button
+        homePage.clickLossInspection();
+        
+        // Verify the Loss Inspection page is displayed
+        Assert.assertTrue(homePage.isLossInspectionPage(), "Failed to verify 'Loss Inspection' page.");
+    }
 
-	@AfterMethod
-	public void teardown() {
-		if (driver != null) {
-			driver.quit();
-		}
-	}
+    // Test for "Insurance Fraud" button
+    @Test(priority = 4)
+    public void testClickInsuranceFraud() {
+        // Click Insurance Fraud button
+        homePage.clickInsuranceFraud();
+        
+        // Verify the Insurance Fraud page is displayed
+        Assert.assertTrue(homePage.isInsuranceFraudPage(), "Failed to verify 'Insurance Fraud' page.");
+    }
 
-	@Test(priority = 1)
-	public void testClickReportAClaim() throws InterruptedException {
-		homePage.clickReportAClaim();
-		Assert.assertTrue(driver.getPageSource().contains("Report a Claim"), "Failed to verify 'Report a Claim' page.");
-	}
-
-	@Test(priority = 2)
-	public void testClickSinkholeClaims() {
-		homePage.clickSinkholeClaims();
-		Assert.assertTrue(driver.getPageSource().contains("Sinkhole Claims"),
-				"Failed to verify 'Sinkhole Claims' page.");
-	}
-
-	@Test(priority = 3)
-	public void testClickLossInspection() {
-		homePage.clickLossInspection();
-		Assert.assertTrue(driver.getPageSource().contains("Loss Inspection"),
-				"Failed to verify 'Loss Inspection' page.");
-	}
-
-	@Test(priority = 4)
-	public void testClickInsuranceFraud() {
-		homePage.clickInsuranceFraud();
-		Assert.assertTrue(driver.getPageSource().contains("Insurance Fraud"),
-				"Failed to verify 'Insurance Fraud' page.");
-	}
-
-	@Test(priority = 5)
-	public void testClickContactCitizensFirst() {
-		homePage.clickContactCitizensFirst();
-		Assert.assertTrue(driver.getPageSource().contains("Contact Citizens First"),
-				"Failed to verify 'Contact Citizens First' page.");
-	}
+    // Test for "Contact Citizens First" button
+    @Test(priority = 5)
+    public void testClickContactCitizensFirst() {
+        // Click Contact Citizens First button
+        homePage.clickContactCitizensFirst();
+        
+        // Verify the Contact Citizens First page is displayed
+        Assert.assertTrue(homePage.isContactCitizensFirstPage(), "Failed to verify 'Contact Citizens First' page.");
+    }
 }

@@ -3,26 +3,27 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="CitizensFLAProject Tests(failed)">
     <classes>
-      <class name="tests.FooterLinksTest">
+      <class name="tests.SignUpNegativeTests">
         <methods>
-          <include name="testClickAccessibility"/>
-          <include name="testClickTermsAndConditions"/>
-          <include name="testClickSiteMap"/>
-          <include name="teardown"/>
+          <include name="testInvalidPolicyNumber"/>
+          <include name="testInvalidEmailFormat"/>
+          <include name="testInvalidZipCode"/>
+          <include name="testSubmitWithoutAgreeingToTerms"/>
           <include name="setup"/>
-          <include name="testClickPrivacyPolicy"/>
-        </methods>
-      </class> <!-- tests.FooterLinksTest -->
-      <class name="tests.LoginTest">
-        <methods>
-          <include name="testEmptyPassword"/>
-          <include name="testEmptyUsernameAndPassword"/>
-          <include name="testInvalidLogin"/>
-          <include name="setup"/>
-          <include name="testEmptyUsername"/>
           <include name="teardown"/>
         </methods>
-      </class> <!-- tests.LoginTest -->
+      </class> <!-- tests.SignUpNegativeTests -->
+      <class name="tests.ClaimsSectionTest">
+        <methods>
+          <include name="testClickSinkholeClaims"/>
+          <include name="testClickReportAClaim"/>
+          <include name="testClickLossInspection"/>
+          <include name="teardown"/>
+          <include name="setup"/>
+          <include name="testClickContactCitizensFirst"/>
+          <include name="testClickInsuranceFraud"/>
+        </methods>
+      </class> <!-- tests.ClaimsSectionTest -->
     </classes>
   </test> <!-- CitizensFLAProject Tests(failed) -->
 </suite> <!-- Failed suite [Suite] -->

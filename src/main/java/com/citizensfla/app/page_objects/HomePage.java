@@ -11,95 +11,136 @@ import java.time.Duration;
 
 public class HomePage {
 
-	WebDriver driver;
-	WebDriverWait wait;
+    WebDriver driver;
+    WebDriverWait wait;
 
-	// Constructor
-	public HomePage(WebDriver driver) {
-		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Increased wait time to 20 seconds
-	}
+    // Constructor
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Increased wait time to 20 seconds
+    }
 
-	// Locators
-	private By claimsButton = By.id("siteNavModalBtn_menu_2");
-	private By reportAClaimButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Report a Claim')]");
-	private By sinkholeClaimsButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Sinkhole Claims')]");
-	private By lossInspectionButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Loss Inspection')]");
-	private By insuranceFraudButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Insurance Fraud')]");
-	private By contactCitizensFirstButton = By
-			.xpath("//a[@class='menu-level-1']//span[contains(text(),'Contact Citizens First')]");
-	private By termsAndConditionsLink = By.cssSelector("a[href*='terms-and-conditions']");
-	private By privacyPolicyLink = By.cssSelector("a[href*='privacy-policy']");
-	private By siteMapLink = By.cssSelector("a[href*='site-map']");
-	private By accessibilityLink = By.cssSelector("a[href*='accessibility']");
-	private By loginButton = By.id("loginAction");
+    // Locators
+    private By claimsButton = By.id("siteNavModalBtn_menu_2");
+    private By reportAClaimButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Report a Claim')]");
+    private By sinkholeClaimsButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Sinkhole Claims')]");
+    private By lossInspectionButton = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/header[1]/div[1]/div[1]/div[2]/div[2]/nav[1]/div[1]/section[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/div[5]/ul[1]/li[1]/a[1]/span[1]");
+    private By insuranceFraudButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Insurance Fraud')]");
+    private By contactCitizensFirstButton = By.xpath("//a[@class='menu-level-1']//span[contains(text(),'Contact Citizens First')]");
+    private By termsAndConditionsLink = By.xpath("//span[normalize-space()='Terms & Conditions']");
+    private By privacyPolicyLink = By.xpath("//span[normalize-space()='Privacy Policy']");
+    private By siteMapLink = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/footer[1]/div[1]/div[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[3]/span[1]");
+    private By accessibilityLink = By.xpath("//span[normalize-space()='Accessibility']");
+    private By loginButton = By.xpath("//a[normalize-space()='Login']");
 
-	// Generalized method to scroll, wait for visibility, and click on the element
-	private void clickElementWithScroll(By locator) {
-		try {
-			WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element); // Scroll to
-																										// element
-			wait.until(ExpectedConditions.elementToBeClickable(locator)).click(); // Wait for the element to be
-																					// clickable and click
-			System.out.println("Successfully clicked the element: " + locator);
-		} catch (Exception e) {
-			System.err.println("Failed to click the element: " + locator);
-			e.printStackTrace();
-		}
-	}
+    
+    // Method to click on the claims button
+    public void clickClaims() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(claimsButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(claimsButton)).click();
+        System.out.println("Claims button clicked successfully.");
+    }
 
-	// Actions
-	public void clickClaims() {
-		clickElementWithScroll(claimsButton);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(), 'Claims')]"))); // Ensure
-																													// the
-																													// section
-																													// is
-																													// loaded
-		System.out.println("Claims section loaded successfully.");
-	}
+    // Method to click on the report a claim button
+    public void clickReportAClaim() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(reportAClaimButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element); // Using JS to force click
+        System.out.println("Report A Claim button clicked successfully.");
+    }
 
-	public void clickReportAClaim() {
-		clickElementWithScroll(reportAClaimButton);
-	}
 
-	public void clickSinkholeClaims() {
-		clickElementWithScroll(sinkholeClaimsButton);
-	}
+    // Method to click on the sinkhole claims button
+    public void clickSinkholeClaims() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(sinkholeClaimsButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(sinkholeClaimsButton)).click();
+        System.out.println("Sinkhole Claims button clicked successfully.");
+    }
 
-	public void clickLossInspection() {
-		clickElementWithScroll(lossInspectionButton);
-	}
+    // Method to click on the loss inspection button
+    public void clickLossInspection() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(lossInspectionButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(lossInspectionButton)).click();
+        System.out.println("Loss Inspection button clicked successfully.");
+    }
 
-	public void clickInsuranceFraud() {
-		clickElementWithScroll(insuranceFraudButton);
-	}
+    // Method to click on the insurance fraud button
+    public void clickInsuranceFraud() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(insuranceFraudButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(insuranceFraudButton)).click();
+        System.out.println("Insurance Fraud button clicked successfully.");
+    }
 
-	public void clickContactCitizensFirst() {
-		clickElementWithScroll(contactCitizensFirstButton);
-	}
+    // Method to click on the contact citizens first button
+    public void clickContactCitizensFirst() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(contactCitizensFirstButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(contactCitizensFirstButton)).click();
+        System.out.println("Contact Citizens First button clicked successfully.");
+    }
 
-	// Footer links actions
-	public void clickTermsAndConditions() {
-		clickElementWithScroll(termsAndConditionsLink);
-	}
+    // Method to click on the terms and conditions link
+    public void clickTermsAndConditions() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(termsAndConditionsLink));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(termsAndConditionsLink)).click();
+        System.out.println("Terms and Conditions link clicked successfully.");
+    }
 
-	public void clickPrivacyPolicy() {
-		clickElementWithScroll(privacyPolicyLink);
-	}
+    // Method to click on the privacy policy link
+    public void clickPrivacyPolicy() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(privacyPolicyLink));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(privacyPolicyLink)).click();
+        System.out.println("Privacy Policy link clicked successfully.");
+    }
 
-	public void clickSiteMap() {
-		clickElementWithScroll(siteMapLink);
-	}
+    // Method to click on the site map link
+    public void clickSiteMap() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(siteMapLink));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(siteMapLink)).click();
+        System.out.println("Site Map link clicked successfully.");
+    }
 
-	public void clickAccessibility() {
-		clickElementWithScroll(accessibilityLink);
-	}
+    // Method to click on the accessibility link
+    public void clickAccessibility() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(accessibilityLink));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(accessibilityLink)).click();
+        System.out.println("Accessibility link clicked successfully.");
+    }
 
-	// Method to click on the login button
-	public void clickLogin() {
-		clickElementWithScroll(loginButton);
-		System.out.println("Login button clicked successfully.");
-	}
+    // Method to click on the login button
+    public void clickLogin() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+        System.out.println("Login button clicked successfully.");
+    }
+
+    // Verify headers
+    public boolean isReportAClaimPage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(reportAClaimButton)).isDisplayed();
+    }
+
+    public boolean isSinkholeClaimsPage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(sinkholeClaimsButton)).isDisplayed();
+    }
+
+    public boolean isLossInspectionPage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(lossInspectionButton)).isDisplayed();
+    }
+
+    public boolean isInsuranceFraudPage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(insuranceFraudButton)).isDisplayed();
+    }
+
+    public boolean isContactCitizensFirstPage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(contactCitizensFirstButton)).isDisplayed();
+    }
 }

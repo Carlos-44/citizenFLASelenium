@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -24,8 +25,8 @@ public class LoginTest {
 	// Initialize the WebDriver, HomePage, and LoginPage before each test
 	@BeforeMethod
 	public void setup() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
 
 		// Maximize the browser window to fill the screen
 		driver.manage().window().maximize();

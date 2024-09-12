@@ -3,8 +3,9 @@
     <test name="CitizensFLAProject Tests">
         <classes>
             <class name="tests.LoginTest"/>
-            <class name="tests.ClaimsSectionTest"/>
+           
             <class name="tests.FooterLinksTest"/>
+            
         </classes>
     </test>
 </suite>

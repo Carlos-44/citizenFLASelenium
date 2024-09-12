@@ -5,7 +5,10 @@
     <classes>
       <class name="tests.SignUpNegativeTests">
         <methods>
-          <include name="testSubmitWithAgreeingToTerms"/>
+          <include name="testInvalidPolicyNumber"/>
+          <include name="testInvalidEmailFormat"/>
+          <include name="testInvalidZipCode"/>
+          <include name="testSubmitWithoutAgreeingToTerms"/>
           <include name="setup"/>
           <include name="teardown"/>
         </methods>
