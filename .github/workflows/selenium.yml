@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '8'
-          distribution: 'adopt' # Use 'adopt' for AdoptOpenJDK
+          distribution: 'adopt' # Use AdoptOpenJDK
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -30,23 +30,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven
 
-      - name: Install Chrome and dependencies
+      - name: Install Microsoft Edge and EdgeDriver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget google-chrome-stable xvfb libxi6 libgconf-2-4
-          google-chrome --version
-
-      - name: Set up ChromeDriver with fallback
-        run: |
-          sudo apt-get install -yqq unzip
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' || echo "114.0.5735")
-          echo "Detected Chrome version: $CHROME_VERSION"
-          CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION || echo "114.0.5735.90")
-          echo "Using ChromeDriver version: $CHROME_DRIVER_VERSION"
-          wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip || wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-          sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          chromedriver --version
+          sudo apt update
+          sudo apt install -y wget software-properties-common
+          wget https://packages.microsoft.com/keys/microsoft.asc -q -O - | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
+          sudo apt install -y microsoft-edge-stable
+          sudo apt install -yqq unzip
+          EDGE_VERSION=$(microsoft-edge --version | grep -oP '\d+\.\d+\.\d+')
+          echo "Detected Edge version: $EDGE_VERSION"
+          EDGEDRIVER_VERSION=$(curl -s https://msedgedriver.azureedge.net/LATEST_RELEASE_$EDGE_VERSION)
+          echo "Using EdgeDriver version: $EDGEDRIVER_VERSION"
+          wget -O /tmp/edgedriver.zip https://msedgedriver.azureedge.net/$EDGEDRIVER_VERSION/edgedriver_linux64.zip
+          sudo unzip /tmp/edgedriver.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/msedgedriver
+          msedgedriver --version
 
       - name: Verify Java installation
         run: java -version
