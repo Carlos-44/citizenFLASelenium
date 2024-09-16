@@ -1,4 +1,1 @@
-tests\FooterLinksTest.class
-tests\SignUpNegativeTests.class
-tests\ClaimsSectionTest.class
-tests\LoginTest.class
+listeners\ExtentReportListener.class

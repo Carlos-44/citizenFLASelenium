@@ -1,6 +1,7 @@
 package com.citizensfla.app.page_objects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,7 +28,9 @@ public class SignUpPage {
 	private By emailField = By.id("emailAddress");
 	private By zipCodeField = By.id("postalCode");
 	private By termsCheckbox = By.xpath("//span[@role='checkbox']");
-	private By signUpButton = By.xpath("//button[@id='signUpButton']//span[contains(text(),'Sign Up')]");
+	private By signUpButton = By.xpath("//button[@id='signUpButton']");
+
+	// Added an updated locator for policy number error
 	private By policyNumberError = By.xpath("//span[@aria-describedby='policyNumber_1440013438']");
 
 	// Actions
@@ -72,14 +75,18 @@ public class SignUpPage {
 		wait.until(ExpectedConditions.elementToBeClickable(signUpButton)).click();
 	}
 
-	// Method to check if the Sign Up button is disabled
+	// Updated method to check if the Sign Up button is disabled using the 'disabled' attribute
 	public boolean isSignUpButtonDisabled() {
-		return !wait.until(ExpectedConditions.visibilityOfElementLocated(signUpButton)).isEnabled();
+		WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(signUpButton));
+		// Explicitly check if the button is disabled using the 'disabled' attribute
+		return button.getAttribute("disabled") != null;
 	}
 
-	// Method to check if the Sign Up button is enabled
-	public boolean isSignUpButtonEnabled() {
-		return wait.until(ExpectedConditions.visibilityOfElementLocated(signUpButton)).isEnabled();
+	// Method to check if the Sign Up button is enabled using JavaScript execution
+	public boolean isSignUpButtonDisabledUsingJS() {
+		WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(signUpButton));
+		// Using JavaScript to check the disabled state
+		return (Boolean) ((JavascriptExecutor) driver).executeScript("return arguments[0].disabled;", button);
 	}
 
 	// Method to get validation error messages for specific fields

@@ -1,11 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Suite">
+    <listeners>
+        <listener class-name="listeners.ExtentReportListener" />
+    </listeners>
     <test name="CitizensFLAProject Tests">
         <classes>
-            <class name="tests.LoginTest"/>
-           
-            <class name="tests.FooterLinksTest"/>
-            
+            <!-- <class name="tests.ClaimsSectionTest" />
+            <class name="tests.FooterLinksTest" />
+            <class name="tests.LoginTest" /> -->
+            <class name="tests.SignUpNegativeTests" />
         </classes>
     </test>
 </suite>

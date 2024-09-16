@@ -2,7 +2,6 @@ package tests;
 
 import com.citizensfla.app.page_objects.SignUpPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +17,7 @@ public class SignUpNegativeTests {
 	@BeforeMethod
 	public void setup() {
 		WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
+		driver = new EdgeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://customer.citizensfla.com/account-management/signup-enrollment");
 
@@ -35,17 +34,18 @@ public class SignUpNegativeTests {
 	// Test case: Submitting without agreeing to Terms and Conditions
 	@Test(priority = 1)
 	public void testSubmitWithoutAgreeingToTerms() {
+		// Fill in the form fields
 		signUpPage.enterFirstName("John");
 		signUpPage.enterLastName("Doe");
 		signUpPage.enterUserName("john_doe");
 		signUpPage.enterPolicyNumber("123456789");
 		signUpPage.enterEmail("john.doe@example.com");
 		signUpPage.enterZipCode("12345");
-
-		// Do not agree to terms and click Sign Up
-		signUpPage.clickSignUp();
-
-		// Ensure the Sign-Up button is disabled due to unaccepted terms
+	
+		// Do NOT check the "Agree to Terms" checkbox
+		// Do NOT attempt to click the Sign-Up button, since the goal is to test if it remains disabled
+	
+		// Verify the Sign-Up button is disabled due to unaccepted terms
 		Assert.assertTrue(signUpPage.isSignUpButtonDisabled(),
 				"Sign-Up button should be disabled if terms are not accepted.");
 	}
@@ -63,9 +63,11 @@ public class SignUpNegativeTests {
 		// Agree to terms
 		signUpPage.agreeToTerms();
 
-		// Check that the "Sign Up" button is disabled
+		// Check that the "Sign Up" button is disabled (both ways)
 		Assert.assertTrue(signUpPage.isSignUpButtonDisabled(),
 				"Sign-Up button should be disabled when email format is invalid.");
+		Assert.assertTrue(signUpPage.isSignUpButtonDisabledUsingJS(),
+				"Sign-Up button should be disabled when email format is invalid (JS Check).");
 	}
 
 	// Test case: Invalid ZIP code format
@@ -81,9 +83,11 @@ public class SignUpNegativeTests {
 		// Agree to terms
 		signUpPage.agreeToTerms();
 
-		// Check that the "Sign Up" button is disabled
+		// Check that the "Sign Up" button is disabled (both ways)
 		Assert.assertTrue(signUpPage.isSignUpButtonDisabled(),
 				"Sign-Up button should be disabled when ZIP code format is invalid.");
+		Assert.assertTrue(signUpPage.isSignUpButtonDisabledUsingJS(),
+				"Sign-Up button should be disabled when ZIP code format is invalid (JS Check).");
 	}
 
 	// Test case: Invalid policy number
@@ -99,8 +103,10 @@ public class SignUpNegativeTests {
 		// Agree to terms
 		signUpPage.agreeToTerms();
 
-		// Check that the "Sign Up" button is disabled
+		// Check that the "Sign Up" button is disabled (both ways)
 		Assert.assertTrue(signUpPage.isSignUpButtonDisabled(),
 				"Sign-Up button should be disabled when policy number is invalid.");
+		Assert.assertTrue(signUpPage.isSignUpButtonDisabledUsingJS(),
+				"Sign-Up button should be disabled when policy number is invalid (JS Check).");
 	}
 }
