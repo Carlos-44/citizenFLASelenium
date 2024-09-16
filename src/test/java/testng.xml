@@ -1,9 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite">
+<suite name="Citizens FLA Project Test Suite" parallel="classes" thread-count="4">
+    <!-- Listener for ExtentReports -->
     <listeners>
-        <listener class-name="listeners.ExtentReportListener" />
+        <listener class-name="tests.ExtentReportListener" />
     </listeners>
-    <test name="CitizensFLAProject Tests">
+    
+    <!-- Test group for all functional tests -->
+    <test name="Citizens FLA Functional Tests">
         <classes>
             <class name="tests.ClaimsSectionTest" />
             <class name="tests.FooterLinksTest" />

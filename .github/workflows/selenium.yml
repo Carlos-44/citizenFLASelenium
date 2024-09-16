@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '11'
-          distribution: 'adopt' # Use AdoptOpenJDK for Java 11
+          distribution: 'temurin' # Updated to Eclipse Temurin for Java 11
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -33,5 +33,22 @@ jobs:
       - name: Verify Java installation
         run: java -version
 
+      - name: Install dependencies
+        run: mvn install
+
       - name: Run Maven tests
-        run: mvn clean test -X
+        run: mvn clean test -X # Keeping -X for debugging
+        continue-on-error: false # Change this to true if you want the job to proceed on errors
+
+      - name: Archive test reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: extent-spark-report
+          path: C:\Users\Carlos Ozoria\eclipse-workspace\CitizensFLAProject\ExtentSparkReport.html
+
+      - name: Always upload test report on failure
+        if: failure() || success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: extent-spark-report
+          path: C:\Users\Carlos Ozoria\eclipse-workspace\CitizensFLAProject\ExtentSparkReport.html
