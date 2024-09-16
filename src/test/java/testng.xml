@@ -5,9 +5,9 @@
     </listeners>
     <test name="CitizensFLAProject Tests">
         <classes>
-            <!-- <class name="tests.ClaimsSectionTest" />
+            <class name="tests.ClaimsSectionTest" />
             <class name="tests.FooterLinksTest" />
-            <class name="tests.LoginTest" /> -->
+            <class name="tests.LoginTest" />
             <class name="tests.SignUpNegativeTests" />
         </classes>
     </test>
