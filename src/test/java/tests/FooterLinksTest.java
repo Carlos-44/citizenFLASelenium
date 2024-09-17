@@ -24,11 +24,8 @@ public class FooterLinksTest {
     public void setup() {
         WebDriverManager.edgedriver().setup();
 
-        // Using EdgeOptions for better execution in different environments
         EdgeOptions options = new EdgeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--disable-extensions");
+        options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080", "--no-sandbox", "--disable-dev-shm-usage", "--remote-allow-origins=*");
 
         driver = new EdgeDriver(options);
         driver.manage().deleteAllCookies();
@@ -44,7 +41,6 @@ public class FooterLinksTest {
         }
     }
 
-    // Test clicking the "Terms & Conditions" link
     @Test(priority = 1)
     public void testClickTermsAndConditions() {
         homePage.clickTermsAndConditions();
@@ -54,7 +50,6 @@ public class FooterLinksTest {
             "Terms & Conditions page did not load as expected.");
     }
 
-    // Test clicking the "Privacy Policy" link
     @Test(priority = 2)
     public void testClickPrivacyPolicy() {
         homePage.clickPrivacyPolicy();
@@ -64,7 +59,6 @@ public class FooterLinksTest {
             "Privacy Policy page did not load as expected.");
     }
 
-    // Test clicking the "Site Map" link
     @Test(priority = 3)
     public void testClickSiteMap() {
         homePage.clickSiteMap();
@@ -74,7 +68,6 @@ public class FooterLinksTest {
             "Site Map page did not load as expected.");
     }
 
-    // Test clicking the "Accessibility" link
     @Test(priority = 4)
     public void testClickAccessibility() {
         homePage.clickAccessibility();

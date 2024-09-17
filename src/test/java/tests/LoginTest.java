@@ -23,33 +23,25 @@ public class LoginTest {
     private LoginPage loginPage;
     private WebDriverWait wait;
 
-    // Initialize the WebDriver, HomePage, and LoginPage before each test
     @BeforeMethod
     public void setup() {
         WebDriverManager.edgedriver().setup();
 
-        // Configure EdgeOptions for better execution
         EdgeOptions options = new EdgeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-extensions");
-        options.addArguments("--disable-gpu");
+        options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080", "--no-sandbox", "--disable-dev-shm-usage", "--remote-allow-origins=*");
 
         driver = new EdgeDriver(options);
         driver.manage().deleteAllCookies();
         driver.get("https://www.citizensfla.com/");
 
-        // Initialize page objects
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
 
-        // Explicit wait initialization
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-        // Wait for and click on the login button before each test
         homePage.clickLogin();
     }
 
-    // Clean up after each test by quitting the browser
     @AfterMethod
     public void teardown() {
         if (driver != null) {
@@ -57,14 +49,12 @@ public class LoginTest {
         }
     }
 
-    // Test for invalid login
     @Test(priority = 1)
     public void testInvalidLogin() {
         loginPage.enterUsername("invalidUser");
         loginPage.enterPassword("invalidPassword");
         loginPage.clickSubmit();
 
-        // Wait for and verify the error message
         WebElement errorMessageElement = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//font[contains(text(),'Username or password is incorrect')]")));
 
@@ -74,13 +64,11 @@ public class LoginTest {
                 "Error message for invalid login is incorrect.");
     }
 
-    // Test when the username is missing
     @Test(priority = 2)
     public void testEmptyUsername() {
         loginPage.enterPassword("validPassword");
         loginPage.clickSubmit();
 
-        // Wait for and verify the error message
         WebElement errorMessageElement = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//font[contains(text(),'Username required')]")));
 
@@ -90,13 +78,11 @@ public class LoginTest {
                 "Error message for missing username is incorrect.");
     }
 
-    // Test when the password is missing
     @Test(priority = 3)
     public void testEmptyPassword() {
         loginPage.enterUsername("validUser");
         loginPage.clickSubmit();
 
-        // Wait for and verify the error message
         WebElement errorMessageElement = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//font[normalize-space()='Password required.']")));
 
@@ -106,12 +92,10 @@ public class LoginTest {
                 "Error message for missing password is incorrect.");
     }
 
-    // Test when both username and password are missing
     @Test(priority = 4)
     public void testEmptyUsernameAndPassword() {
         loginPage.clickSubmit();
 
-        // Wait for and verify the error message
         WebElement errorMessageElement = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//font[normalize-space()='Enter username and password to log in.']")));
 
