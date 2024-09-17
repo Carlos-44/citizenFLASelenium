@@ -45,12 +45,13 @@ jobs:
       - name: Run Maven tests
         run: mvn test
 
+# Add this to your GitHub Actions YAML file
       # Step 7: Archive the Extent Report
       - name: Archive test reports
         uses: actions/upload-artifact@v3
         with:
           name: extent-spark-report
-          path: ./ExtentSparkReport.html  # Adjust this path based on where the report is generated
+          path: ./CICD.testReport/ExtentSparkReport_*.html  # Use wildcard to capture all reports
 
       # Step 8: Always upload test report on failure
       - name: Always upload test report on failure

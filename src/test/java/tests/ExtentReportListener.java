@@ -27,15 +27,27 @@ public class ExtentReportListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        // Generate a dynamic path for reports with timestamp
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
-        String reportPath = System.getProperty("user.dir") + "/reports/ExtentSparkReport_" + timestamp + ".html";
+        // Create a folder for reports if it doesn't exist
+        String reportsDir = System.getProperty("user.dir") + "/CICD.testReport";
+        File dir = new File(reportsDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
 
+        // Generate a new report for each run with a unique timestamp
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date());
+        String reportPath = reportsDir + "/ExtentSparkReport_" + timestamp + ".html";
+
+        // Initialize ExtentSparkReporter
         spark = new ExtentSparkReporter(reportPath);
+        spark.config().setReportName("Test Execution Report - " + timestamp);  // Customize report name
+        spark.config().setDocumentTitle("Automation Test Results - " + timestamp);  // Customize report title
+
+        // Initialize ExtentReports and attach the reporter
         extent = new ExtentReports();
         extent.attachReporter(spark);
 
-        // Set additional information for the report (optional)
+        // Set additional information for the report
         extent.setSystemInfo("Test Suite", context.getSuite().getName());
         extent.setSystemInfo("Test Environment", "Production");
     }
@@ -61,16 +73,15 @@ public class ExtentReportListener implements ITestListener {
         test.log(Status.FAIL, "Test Failed: " + result.getMethod().getMethodName());
         test.log(Status.FAIL, result.getThrowable());
     
-// Capture screenshot for the failed test
-if (driver != null) {
-    String screenshotPath = captureScreenshot(result.getMethod().getMethodName());
-    test.addScreenCaptureFromPath(screenshotPath);  // No try-catch needed
-} else {
-    test.log(Status.WARNING, "WebDriver instance was null, could not capture screenshot.");
-}
-
+        // Capture screenshot for the failed test
+        if (driver != null) {
+            String screenshotPath = captureScreenshot(result.getMethod().getMethodName());
+            test.addScreenCaptureFromPath(screenshotPath);  // No try-catch needed
+        } else {
+            test.log(Status.WARNING, "WebDriver instance was null, could not capture screenshot.");
+        }
     }
-    
+  
     @Override
     public void onTestSkipped(ITestResult result) {
         test.log(Status.SKIP, "Test Skipped: " + result.getMethod().getMethodName());
@@ -78,7 +89,7 @@ if (driver != null) {
 
     @Override
     public void onFinish(ITestContext context) {
-        extent.flush();
+        extent.flush();  // Save the report
     }
 
     // Method to capture screenshot
