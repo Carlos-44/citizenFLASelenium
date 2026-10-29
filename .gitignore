@@ -23,3 +23,12 @@
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
+
+# Generated reports
+/reports/
+/CICD.testReport/
+ExtentSparkReport*.html
+
+# IDE
+.vscode/
+.idea/
