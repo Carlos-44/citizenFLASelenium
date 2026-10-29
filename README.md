@@ -32,11 +32,13 @@ mvn test -Dtest=LoginTest
 The ExtentReports HTML report is written to `CICD.testReport/`.
 
 ## What's Tested
-17 tests in 4 classes, run in parallel by class:
+9 active tests in 2 classes, run in parallel by class:
 - **Claims section** (`ClaimsSectionTest`): Report a Claim, Sinkhole Claims, Loss Inspection, Insurance Fraud and Contact Citizens First each land on the expected URL
 - **Footer links** (`FooterLinksTest`): Terms & Conditions, Privacy Policy, Site Map and Accessibility pages load with the expected header
-- **Login, negative cases** (`LoginTest`): invalid credentials, empty username, empty password and both empty each show the expected error message
-- **Sign-up validation** (`SignUpNegativeTests`): the submit button stays disabled without accepting terms, with an invalid email, zip code or policy number
+
+Temporarily disabled in `testng.xml` (the live site redesigned these flows in 2026):
+- **Login, negative cases** (`LoginTest`): invalid credentials, empty username, empty password, both empty
+- **Sign-up validation** (`SignUpNegativeTests`): submit button disabled without terms, or with an invalid email, zip code or policy number
 
 > These tests hit a live third-party website, so content changes or bot protection on the site can cause failures that aren't bugs in the tests.
 
