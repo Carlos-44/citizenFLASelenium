@@ -29,7 +29,6 @@ public class ClaimsSectionTest {
 
         // Browser configuration
         driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         // Navigate to Citizens website

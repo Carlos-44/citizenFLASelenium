@@ -28,7 +28,6 @@ public class FooterLinksTest {
         options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080", "--no-sandbox", "--disable-dev-shm-usage", "--remote-allow-origins=*");
 
         driver = new EdgeDriver(options);
-        driver.manage().deleteAllCookies();
         driver.get("https://www.citizensfla.com/");
         homePage = new HomePage(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
