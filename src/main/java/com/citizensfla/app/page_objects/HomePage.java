@@ -31,7 +31,6 @@ public class HomePage {
     private By privacyPolicyLink = By.xpath("//span[normalize-space()='Privacy Policy']");
     private By siteMapLink = By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/footer[1]/div[1]/div[1]/div[1]/div[1]/div[1]/section[1]/div[1]/div[2]/div[1]/div[1]/div[1]/a[3]/span[1]");
     private By accessibilityLink = By.xpath("//span[normalize-space()='Accessibility']");
-    private By loginButton = By.xpath("//a[normalize-space()='Login']");
 
     
     // Method to click on the claims button
@@ -115,13 +114,6 @@ public class HomePage {
         System.out.println("Accessibility link clicked successfully.");
     }
 
-    // Method to click on the login button
-    public void clickLogin() {
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
-        System.out.println("Login button clicked successfully.");
-    }
 
     // Verify headers
     public boolean isReportAClaimPage() {
