@@ -7,22 +7,22 @@ Feature: Claims Section Navigation
     Given I am on the Citizens Florida home page
     And I have opened the Claims navigation menu
 
-  Scenario: Navigate to the Report a Claim page
+  Scenario: [TC-001] Navigate to the Report a Claim page
     When I click the "Report a Claim" menu item
     Then the current URL should be "https://www.citizensfla.com/report-a-claim"
 
-  Scenario: Navigate to the Sinkhole Claims page
+  Scenario: [TC-002] Navigate to the Sinkhole Claims page
     When I click the "Sinkhole Claims" menu item
     Then the current URL should be "https://www.citizensfla.com/sinkhole-claims"
 
-  Scenario: Navigate to the Loss Inspection page
+  Scenario: [TC-003] Navigate to the Loss Inspection page
     When I click the "Loss Inspection" menu item
     Then the current URL should be "https://www.citizensfla.com/loss-inspection"
 
-  Scenario: Navigate to the Insurance Fraud page
+  Scenario: [TC-004] Navigate to the Insurance Fraud page
     When I click the "Insurance Fraud" menu item
     Then the current URL should be "https://www.citizensfla.com/insurance-fraud"
 
-  Scenario: Navigate to the Contact Citizens First page
+  Scenario: [TC-005] Navigate to the Contact Citizens First page
     When I click the "Contact Citizens First" menu item
     Then the current URL should be "https://www.citizensfla.com/call-citizens-first"

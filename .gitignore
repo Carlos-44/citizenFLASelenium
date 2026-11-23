@@ -32,3 +32,4 @@ ExtentSparkReport*.html
 # IDE
 .vscode/
 .idea/
+allure-results/

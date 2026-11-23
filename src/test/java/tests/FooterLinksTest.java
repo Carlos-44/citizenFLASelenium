@@ -40,7 +40,7 @@ public class FooterLinksTest {
         }
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "[TC-006] Navigate to the Terms and Conditions page")
     public void testClickTermsAndConditions() {
         homePage.clickTermsAndConditions();
         wait.until(ExpectedConditions.titleContains("Terms & Conditions"));
@@ -49,7 +49,7 @@ public class FooterLinksTest {
             "Terms & Conditions page did not load as expected.");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "[TC-007] Navigate to the Privacy Policy page")
     public void testClickPrivacyPolicy() {
         homePage.clickPrivacyPolicy();
         wait.until(ExpectedConditions.titleContains("Privacy Policy"));
@@ -58,7 +58,7 @@ public class FooterLinksTest {
             "Privacy Policy page did not load as expected.");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "[TC-008] Navigate to the Site Map page")
     public void testClickSiteMap() {
         homePage.clickSiteMap();
         wait.until(ExpectedConditions.titleContains("Site Map"));
@@ -67,7 +67,7 @@ public class FooterLinksTest {
             "Site Map page did not load as expected.");
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "[TC-009] Navigate to the Accessibility page")
     public void testClickAccessibility() {
         homePage.clickAccessibility();
         wait.until(ExpectedConditions.titleContains("Accessibility"));
